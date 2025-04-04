@@ -7,6 +7,9 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { ClerkProvider } from '@clerk/clerk-expo';
+import { Slot } from 'expo-router';
+import { tokenCache } from '@clerk/clerk-expo/token-cache';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -28,12 +31,15 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+		// <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+		//   <Stack>
+		//     <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+		//     <Stack.Screen name="+not-found" />
+		//   </Stack>
+		//   <StatusBar style="auto" />
+		// </ThemeProvider>
+		<ClerkProvider tokenCache={tokenCache}>
+			<Slot />
+		</ClerkProvider>
   );
 }
