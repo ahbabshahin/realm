@@ -1,13 +1,13 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { ClerkProvider } from '@clerk/clerk-expo';
+import { ClerkProvider, } from '@clerk/clerk-expo';
 import { Slot } from 'expo-router';
 import { tokenCache } from '@clerk/clerk-expo/token-cache';
 
@@ -29,6 +29,15 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
+
+  // 	const { user, isLoaded } = useUser();
+	// const router = useRouter();
+
+	// useEffect(() => {
+	// 	if (isLoaded && !user) {
+	// 		router.replace('/(auth)/sign-in');
+	// 	}
+	// }, [user, isLoaded]);
 
   return (
 		// <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
