@@ -1,14 +1,16 @@
 import { Stack } from 'expo-router/stack';
 
 export default function Layout() {
-	return (
+  return (
 		<Stack>
 			<Stack.Screen
-				name='index'
+				name='[id]'
 				options={{
-					headerTitle: 'Home',
+					headerTitle: 'Chat',
+					headerBackButtonMenuEnabled: true,
+					headerBackButtonDisplayMode: 'generic',
 				}}
 			/>
 		</Stack>
-	);
+  );
 }
