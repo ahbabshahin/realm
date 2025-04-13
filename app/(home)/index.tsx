@@ -40,7 +40,7 @@ export default function Page() {
 			console.log('fetch');
 			// const chats = await axios.get(`/chat/${user?.id}`);
 			const response: any = await axios.get(
-				`http://192.168.1.3:5000/api/chat/user_12345`
+				`http://192.168.1.9:5000/api/chat/user_12345`
 			);
 
 			console.log('chats', response?.data);
@@ -72,12 +72,23 @@ export default function Page() {
 				elevation: 3,
 			}}
 		>
-			<Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 4 }}>
-				{item?.user} {item?.chatId}
-			</Text>
-			<Text style={{ color: '#666' }}>
-				Created at: {new Date(item.createdAt).toLocaleString()}
-			</Text>
+			<Link href={{
+				pathname: '/chat/[id]',
+				params: {id: item?.chatId}
+			}}>
+				<Text
+					style={{
+						fontSize: 16,
+						fontWeight: 'bold',
+						marginBottom: 4,
+					}}
+				>
+					{item?.bot}
+				</Text>
+				<Text style={{ color: '#666' }}>
+					Created at: {new Date(item.createdAt).toLocaleString()}
+				</Text>
+			</Link>
 			{/* <FlashList
 				data={item.messages}
 				estimatedItemSize={50}
@@ -117,8 +128,14 @@ export default function Page() {
 
 					<SignOutButton />
 				</View>
+
 				<TouchableOpacity
-					onPress={() => console.log('Button pressed')}
+					onPress={() =>
+						router.push({
+							pathname: '/chat/[id]',
+							params: {id: user?.id}
+						})
+					}
 					style={{
 						position: 'absolute',
 						bottom: 30,
